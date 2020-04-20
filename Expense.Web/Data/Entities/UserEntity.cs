@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Expense.Web.Data.Entities
 {
-    public class UserEntity
+    public class UserEntity : IdentityUser
     {
         [Display(Name = "Document")]
         [MaxLength(20, ErrorMessage = "The {0} field can not have more than {1} characters.")]
@@ -25,13 +26,6 @@ namespace Expense.Web.Data.Entities
 
         [MaxLength(100, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         public string Address { get; set; }
-
-        [Display(Name = "Picture")]
-        public string PicturePath { get; set; }
-
-        [Display(Name = "User Type")]
-        public UserType UserType { get; set; }
-        public string FullName => $"{FirstName} {LastName}";
 
         public string FullNameWithDocument => $"{FirstName} {LastName} - {Document}";
 
