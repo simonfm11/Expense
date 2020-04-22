@@ -93,7 +93,7 @@ namespace Expense.Web.Helpers
                 PicturePath = path,
                 PhoneNumber = model.PhoneNumber,
                 UserName = model.Username,
-                UserType = Common.Enums.UserType.Employee
+                UserType = Common.Enums.UserType.User
             };
 
             IdentityResult result = await _userManager.CreateAsync(userEntity, model.Password);

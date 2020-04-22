@@ -1,11 +1,7 @@
 ﻿using Expense.Common.Models;
 using Expense.Web.Data.Entities;
-using Remotion.Linq.Clauses;
-using Remotion.Linq.Clauses.ResultOperators;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Expense.Web.Helpers
 {

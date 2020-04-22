@@ -1,15 +1,18 @@
 ﻿using Expense.Web.Data.Entities;
+using Expense.Common.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Expense.Web.Helpers;
 
 namespace Expense.Web.Data
 {
     public class SeedDb
     {
         private readonly DataContext _dataContext;
+        private readonly IUserHelper _userHelper;
 
         public SeedDb(
             DataContext dataContext)
@@ -21,28 +24,20 @@ namespace Expense.Web.Data
         {
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRolesAsync();
-            await CheckExpenseTypeAsync();
             await CheckUserAsync("1111", "Simon", "simonfm11@hotmail.com", "320 154 84 69", "Cra 11 # 54 -85", UserType.Admin);
-            UserEntity user1 = await CheckUserAsync("2222", "Daniel", "lopez", "daniel@yopmail.com", "323 548 98 78", "La tierra del olvido", UserType.Employee);
-            UserEntity user2 = await CheckUserAsync("3333", "Valentina", "trujillo", "valentina@yopmail.com", "312 768 32 45", "La playa con carabobo", UserType.Employee);
+            UserEntity user1 = await CheckUserAsync("2222", "Daniel", "lopez", "daniel@yopmail.com", "323 548 98 78", "La tierra del olvido", UserType.User);
+            UserEntity user2 = await CheckUserAsync("3333", "Valentina", "trujillo", "valentina@yopmail.com", "312 768 32 45", "La playa con carabobo", UserType.User);
             await CheckTripsAsync(user1, user2);
         }
-
-        public async Task SeedAsync()
-        {
-            await _dataContext.Database.EnsureCreatedAsync();
-            await CheckTripsAsync();
-        }
-
 
         private async Task CheckExpenseTypeAsync()
         {
             if (!_dataContext.ExpenseTypes.Any())
             {
-                AddExpenseType("Comida");
-                AddExpenseType("Transporte");
-                AddExpenseType("Estadia");
-                AddExpenseType("Representacion");
+                AddExpenseType("Food");
+                AddExpenseType("Transport");
+                AddExpenseType("stay");
+                AddExpenseType("Representation");
                 AddExpenseType("Varios");
             }
             await _dataContext.SaveChangesAsync();
@@ -51,7 +46,7 @@ namespace Expense.Web.Data
         public async Task CheckRolesAsync()
         {
             await _userHelper.CheckRoleAsync(UserType.Admin.ToString());
-            await _userHelper.CheckRoleAsync(UserType.Employee.ToString());
+            await _userHelper.CheckRoleAsync(UserType.User.ToString());
         }
 
         private async Task<UserEntity> CheckUserAsync(
@@ -125,24 +120,24 @@ namespace Expense.Web.Data
                         new TripDetailsEntity
                         {
                             Date = DateTime.UtcNow,
-                            Amount = 180000,
-                            Description = "Stayd hotal HOI AN",
+                            Amount = 45000,
+                            Description = "Hostal",
                             PicturePath = $"~/images/vouncher/VouncherStayed.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Stay")
                         },
                         new TripDetailsEntity
                         {
                             Date = DateTime.UtcNow,
-                            Amount = 75000,
-                            Description = "Day Food",
+                            Amount = 35000,
+                            Description = "Fast food",
                             PicturePath = $"~/images/vouncher/VouncherFood.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Food")
                         },
                         new TripDetailsEntity
                         {
                             Date = DateTime.UtcNow,
-                            Amount = 320000,
-                            Description = "Annual Conference",
+                            Amount = 150000,
+                            Description = "Event",
                             PicturePath = $"~/images/vouncher/VouncherRepr.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Representation")
                         }
@@ -151,16 +146,16 @@ namespace Expense.Web.Data
 
                 _dataContext.Trips.Add(new TripEntity
                 {
-                    Description = "Holiday Travel",
+                    Description = "Vacations",
                     StartDate = DateTime.UtcNow,
                     EndDate = DateTime.UtcNow.AddMinutes(30),
                     User = user2,
                     City = new CityEntity
                     {
-                        City = "Santa Marta",
+                        City = "Venice",
                         Country = new CountryEntity
                         {
-                            Country = "Colombia"
+                            Country = "USA"
                         }
                     },
                     TripDetails = new List<TripDetailsEntity>
@@ -168,32 +163,32 @@ namespace Expense.Web.Data
                         new TripDetailsEntity
                         {
                             Date = DateTime.UtcNow,
-                            Amount = 89000,
-                            Description = "Taxi to airport",
+                            Amount = 180000,
+                            Description = "Tour",
                             PicturePath = $"~/images/vouncher/VouncherTaxi.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Transport")
                         },
                         new TripDetailsEntity
                         {
                             Date = DateTime.UtcNow,
-                            Amount = 670000,
-                            Description = "Stayd hotal Sweet Water",
+                            Amount = 35000,
+                            Description = "Hostal DONT FORGET ME ",
                             PicturePath = $"~/images/vouncher/VouncherStayed.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Stay")
                         },
                         new TripDetailsEntity
                         {
                             Date = DateTime.UtcNow,
-                            Amount = 76000,
-                            Description = "Day Food",
+                            Amount = 45000,
+                            Description = "Dinner",
                             PicturePath = $"~/images/vouncher/VouncherFood.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Food")
                         },
                         new TripDetailsEntity
                         {
                             Date = DateTime.UtcNow,
-                            Amount = 655000,
-                            Description = "Beach games",
+                            Amount = 78400,
+                            Description = "Disco",
                             PicturePath = $"~/images/vouncher/VouncherRepr.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Others")
                         }
@@ -203,16 +198,16 @@ namespace Expense.Web.Data
 
                 _dataContext.Trips.Add(new TripEntity
                 {
-                    Description = "Holiday Travel",
+                    Description = "Vacations",
                     StartDate = DateTime.UtcNow,
                     EndDate = DateTime.UtcNow.AddMinutes(30),
-                    User = user1,
+                    User = user2,
                     City = new CityEntity
                     {
-                        City = "Cartagena",
+                        City = "Venice",
                         Country = new CountryEntity
                         {
-                            Country = "Colombia"
+                            Country = "USA"
                         }
                     },
                     TripDetails = new List<TripDetailsEntity>
@@ -220,32 +215,32 @@ namespace Expense.Web.Data
                         new TripDetailsEntity
                         {
                             Date = DateTime.UtcNow,
-                            Amount = 98000,
-                            Description = "Taxi to airport",
+                            Amount = 250000,
+                            Description = "Tour",
                             PicturePath = $"~/images/vouncher/VouncherTaxi.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Transport")
                         },
                         new TripDetailsEntity
                         {
                             Date = DateTime.UtcNow,
-                            Amount = 678000,
-                            Description = "Stayd hotal Sweet Water",
+                            Amount = 85000,
+                            Description = "Hostal DONT FORGET ME ",
                             PicturePath = $"~/images/vouncher/VouncherStayed.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Stay")
                         },
-                        new TripDetailsEntity   
+                        new TripDetailsEntity
                         {
                             Date = DateTime.UtcNow,
-                            Amount = 76564,
-                            Description = "Day Food",
+                            Amount = 79000,
+                            Description = "Dinner",
                             PicturePath = $"~/images/vouncher/VouncherFood.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Food")
                         },
                         new TripDetailsEntity
                         {
                             Date = DateTime.UtcNow,
-                            Amount = 65333,
-                            Description = "Beach games",
+                            Amount = 78400,
+                            Description = "Disco",
                             PicturePath = $"~/images/vouncher/VouncherRepr.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Others")
                         }
