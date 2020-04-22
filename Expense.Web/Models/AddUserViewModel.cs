@@ -33,4 +33,4 @@ namespace Expense.Web.Models
     public IEnumerable<SelectListItem> UserTypes { get; set; }
 
 }
-}
+
