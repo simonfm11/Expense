@@ -16,11 +16,11 @@ namespace Expense.Common.Models
 
         public DateTime StartDateLocal => StartDate.ToLocalTime();
 
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
+
+        public DateTime? EndDateLocal => EndDate?.ToLocalTime();
 
         public decimal TotalAmount { get; set; }
-
-        public DateTime EndDateLocal => EndDate.ToLocalTime();
 
         public UserResponse User { get; set; }
 

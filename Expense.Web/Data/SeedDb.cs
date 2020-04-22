@@ -15,16 +15,18 @@ namespace Expense.Web.Data
         private readonly IUserHelper _userHelper;
 
         public SeedDb(
-            DataContext dataContext)
+            DataContext dataContext,
+            IUserHelper userHelper)
         {
             _dataContext = dataContext;
+            _userHelper = userHelper;
         }
 
         public async Task SeedAsync()
         {
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRolesAsync();
-            await CheckUserAsync("1111", "Simon", "simonfm11@hotmail.com", "320 154 84 69", "Cra 11 # 54 -85", UserType.Admin);
+            await CheckUserAsync("1111","Simon","Florez","simonfm11@hotmail.com", "320 154 84 69", "Cra 11 # 54 -85", UserType.Admin);
             UserEntity user1 = await CheckUserAsync("2222", "Daniel", "lopez", "daniel@yopmail.com", "323 548 98 78", "La tierra del olvido", UserType.User);
             UserEntity user2 = await CheckUserAsync("3333", "Valentina", "trujillo", "valentina@yopmail.com", "312 768 32 45", "La playa con carabobo", UserType.User);
             await CheckTripsAsync(user1, user2);
@@ -38,7 +40,7 @@ namespace Expense.Web.Data
                 AddExpenseType("Transport");
                 AddExpenseType("stay");
                 AddExpenseType("Representation");
-                AddExpenseType("Varios");
+                AddExpenseType("Other");
             }
             await _dataContext.SaveChangesAsync();
         }
@@ -190,7 +192,7 @@ namespace Expense.Web.Data
                             Amount = 78400,
                             Description = "Disco",
                             PicturePath = $"~/images/vouncher/VouncherRepr.jpg",
-                            ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Others")
+                            ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Other")
                         }
                     }
                 });

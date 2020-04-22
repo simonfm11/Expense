@@ -14,8 +14,6 @@ namespace Expense.Common.Models
 
         public DateTime Date { get; set; }
 
-        public DateTime StartDateLocal => Date.ToLocalTime();
-
         public string PicturePath { get; set; }
 
         public TripResponse Trip { get; set; }
