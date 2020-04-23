@@ -12,6 +12,6 @@ namespace Expense.Web.Data.Entities
 
         public CountryEntity Country { get; set; }
 
-        public ICollection<TripEntity> trips { get; set; }
+        public ICollection<TripEntity> Trips { get; set; }
     }
 }
