@@ -119,7 +119,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 20000,
                             Description = "Metro",
-                            PicturePath = $"~/images/vouncher/VouncherTaxi.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Transport")
                         },
                         new TripDetailsEntity
@@ -127,7 +127,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 45000,
                             Description = "Hostal",
-                            PicturePath = $"~/images/vouncher/VouncherStayed.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Stay")
                         },
                         new TripDetailsEntity
@@ -135,7 +135,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 35000,
                             Description = "Fast food",
-                            PicturePath = $"~/images/vouncher/VouncherFood.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Food")
                         },
                         new TripDetailsEntity
@@ -143,7 +143,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 150000,
                             Description = "Event",
-                            PicturePath = $"~/images/vouncher/VouncherRepr.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Representation")
                         }
                     }
@@ -170,7 +170,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 180000,
                             Description = "Tour",
-                            PicturePath = $"~/images/vouncher/VouncherTaxi.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Transport")
                         },
                         new TripDetailsEntity
@@ -178,7 +178,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 35000,
                             Description = "Hostal DONT FORGET ME ",
-                            PicturePath = $"~/images/vouncher/VouncherStayed.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Stay")
                         },
                         new TripDetailsEntity
@@ -186,7 +186,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 45000,
                             Description = "Dinner",
-                            PicturePath = $"~/images/vouncher/VouncherFood.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Food")
                         },
                         new TripDetailsEntity
@@ -194,7 +194,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 78400,
                             Description = "Disco",
-                            PicturePath = $"~/images/vouncher/VouncherRepr.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Other")
                         }
                     }
@@ -222,7 +222,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 250000,
                             Description = "Tour",
-                            PicturePath = $"~/images/vouncher/VouncherTaxi.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Transport")
                         },
                         new TripDetailsEntity
@@ -230,7 +230,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 85000,
                             Description = "Hostal DONT FORGET ME ",
-                            PicturePath = $"~/images/vouncher/VouncherStayed.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Stay")
                         },
                         new TripDetailsEntity
@@ -238,7 +238,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 79000,
                             Description = "Dinner",
-                            PicturePath = $"~/images/vouncher/VouncherFood.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Food")
                         },
                         new TripDetailsEntity
@@ -246,7 +246,7 @@ namespace Expense.Web.Data
                             Date = DateTime.UtcNow,
                             Amount = 78400,
                             Description = "Disco",
-                            PicturePath = $"~/images/vouncher/VouncherRepr.jpg",
+                            PicturePath = $"~/images/Receipts/receipt.jpg",
                             ExpenseType = await _dataContext.ExpenseTypes.FirstOrDefaultAsync(e => e.Expense == "Others")
                         }
                     }

@@ -19,7 +19,12 @@ namespace Expense.Web.Controllers
         // GET: Trips
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Trips.ToListAsync());
+            return View(await _context.Trips
+                .Include(t => t.City)
+                .Include(t => t.User)
+                .Include(td => td.TripDetails)
+                .OrderByDescending(t => t.StartDate)
+                .ToListAsync());
         }
 
         // GET: Trips/Details/5
@@ -31,11 +36,16 @@ namespace Expense.Web.Controllers
             }
 
             TripEntity tripEntity = await _context.Trips
+                .Include(t => t.User)
+                .Include(t => t.TripDetails)
+                .ThenInclude(t => t.ExpenseType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tripEntity == null)
             {
                 return NotFound();
             }
+
+
 
             return View(tripEntity);
         }

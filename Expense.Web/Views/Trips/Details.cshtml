@@ -1,24 +1,64 @@
-﻿@model Expense.Web.Data.Entities.ExpenseTypeEntity
+﻿@model Expense.Web.Data.Entities.TripEntity
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+@{
+    var trips = Model.TripDetails.ToList();
+}
+
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center"><b>Trip Details</b></h3>
+            </div>
+            <table class="table table-hover table-responsive table-striped" id="MyTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(modeltrips => modeltrips.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(modeltrips => modeltrips.StartDateLocal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(modeltrips => modeltrips.TotalAmount)
+                        </th>
+                        <th>
+                            Picture
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in trips)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelitem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelitem => item.DateLocal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelitem => item.Amount)
+                            </td>
+                            <td>
+                                <img src="@Url.Content(item.PicturePath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
 
 <div>
-    <h4>Expense Details</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Expense)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Expense)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-success">Back to List</a>
 </div>
