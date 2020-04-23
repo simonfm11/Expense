@@ -1,4 +1,4 @@
-﻿@model Expense.Web.Data.Entities.TripEntity
+﻿@model Expense.Web.Data.Entities.ExpenseTypeEntity
 
 @{
     ViewData["Title"] = "Details";
@@ -7,30 +7,18 @@
 <h2>Details</h2>
 
 <div>
-    <h4>TripEntity</h4>
+    <h4>ExpenseTypeEntity</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => model.Expense)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.Expense)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

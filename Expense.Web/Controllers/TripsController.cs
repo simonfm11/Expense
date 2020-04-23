@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Expense.Web.Data;
+using Expense.Web.Data.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Expense.Web.Data;
-using Expense.Web.Data.Entities;
 
 namespace Expense.Web.Controllers
 {
@@ -33,7 +30,7 @@ namespace Expense.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips
+            TripEntity tripEntity = await _context.Trips
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tripEntity == null)
             {
@@ -73,7 +70,7 @@ namespace Expense.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips.FindAsync(id);
+            TripEntity tripEntity = await _context.Trips.FindAsync(id);
             if (tripEntity == null)
             {
                 return NotFound();
@@ -124,7 +121,7 @@ namespace Expense.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips
+            TripEntity tripEntity = await _context.Trips
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tripEntity == null)
             {
@@ -139,7 +136,7 @@ namespace Expense.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tripEntity = await _context.Trips.FindAsync(id);
+            TripEntity tripEntity = await _context.Trips.FindAsync(id);
             _context.Trips.Remove(tripEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

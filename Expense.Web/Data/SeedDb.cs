@@ -1,11 +1,11 @@
-﻿using Expense.Web.Data.Entities;
-using Expense.Common.Enums;
+﻿using Expense.Common.Enums;
+using Expense.Web.Data.Entities;
+using Expense.Web.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Expense.Web.Helpers;
 
 namespace Expense.Web.Data
 {
@@ -26,7 +26,7 @@ namespace Expense.Web.Data
         {
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRolesAsync();
-            await CheckUserAsync("1111","Simon","Florez","simonfm11@hotmail.com", "320 154 84 69", "Cra 11 # 54 -85", UserType.Admin);
+            await CheckUserAsync("1111", "Simon", "Florez", "simonfm11@hotmail.com", "320 154 84 69", "Cra 11 # 54 -85", UserType.Admin);
             UserEntity user1 = await CheckUserAsync("2222", "Daniel", "lopez", "daniel@yopmail.com", "323 548 98 78", "La tierra del olvido", UserType.User);
             UserEntity user2 = await CheckUserAsync("3333", "Valentina", "trujillo", "valentina@yopmail.com", "312 768 32 45", "La playa con carabobo", UserType.User);
             await CheckTripsAsync(user1, user2);
