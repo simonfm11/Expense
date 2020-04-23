@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Expense.Web.Data;
+﻿using Expense.Web.Data;
 using Expense.Web.Data.Entities;
 using Expense.Web.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Expense.Web
 {
@@ -38,13 +35,30 @@ namespace Expense.Web
 
             services.AddIdentity<UserEntity, IdentityRole>(cfg =>
             {
+                cfg.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
+                cfg.SignIn.RequireConfirmedEmail = true;
                 cfg.User.RequireUniqueEmail = true;
                 cfg.Password.RequireDigit = false;
                 cfg.Password.RequiredUniqueChars = 0;
                 cfg.Password.RequireLowercase = false;
                 cfg.Password.RequireNonAlphanumeric = false;
                 cfg.Password.RequireUppercase = false;
-            }).AddEntityFrameworkStores<DataContext>();
+            }).AddDefaultTokenProviders()
+              .AddEntityFrameworkStores<DataContext>();
+
+            services.AddAuthentication()
+           .AddCookie()
+           .AddJwtBearer(cfg =>
+           {
+               cfg.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidIssuer = Configuration["Tokens:Issuer"],
+                   ValidAudience = Configuration["Tokens:Audience"],
+                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
+               };
+           });
+
+
 
 
             services.AddDbContext<DataContext>(cfg =>
@@ -72,10 +86,12 @@ namespace Expense.Web
                 app.UseHsts();
             }
 
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseCookiePolicy();
+            
 
             app.UseMvc(routes =>
             {

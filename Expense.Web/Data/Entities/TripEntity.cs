@@ -7,7 +7,6 @@ namespace Expense.Web.Data.Entities
 {
     public class TripEntity
     {
-
         public int Id { get; set; }
 
         [DataType(DataType.DateTime)]

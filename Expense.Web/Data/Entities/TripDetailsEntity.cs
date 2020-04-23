@@ -29,5 +29,6 @@ namespace Expense.Web.Data.Entities
         public TripEntity Trip { get; set; }
 
         public ExpenseTypeEntity ExpenseType { get; set; }
+
     }
 }
