@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Expense.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   // [Authorize(Roles = "Admin")]
     public class ExpenseTypeController : Controller
     {
         private readonly DataContext _context;
